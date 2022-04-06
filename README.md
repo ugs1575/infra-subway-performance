@@ -125,12 +125,8 @@ WHERE (hobby = 'yes' AND student LIKE 'yes%') OR years_coding = '0-2 years';
 - 서울대병원에 다닌 20대 India 환자들을 병원에 머문 기간별로 집계하세요. (covid.Stay)
 ``` sql
 ALTER TABLE covid ADD PRIMARY KEY (id);
-ALTER TABLE programmer ADD PRIMARY KEY (id);
-ALTER TABLE member ADD PRIMARY KEY (id);
-CREATE INDEX idx_stay  ON covid (hospital_id,stay);
-CREATE INDEX idx_age  ON member (age);
-CREATE INDEX idx_country  ON programmer (country);
-CREATE INDEX idx_name  ON hospital (name);
+CREATE INDEX idx_hospital_member_programmer_id  ON covid (hospital_id,member_id,programmer_id); 
+CREATE INDEX idx_name ON hospital (name);
 
 
 EXPLAIN
@@ -148,12 +144,8 @@ GROUP BY covid.stay;
 - 서울대병원에 다닌 30대 환자들을 운동 횟수별로 집계하세요. (user.Exercise)
 ``` sql
 ALTER TABLE covid ADD PRIMARY KEY (id);
-ALTER TABLE programmer ADD PRIMARY KEY (id);
-ALTER TABLE member ADD PRIMARY KEY (id);
-CREATE INDEX idx_stay  ON covid (programmer_id,member_id);
-CREATE INDEX idx_age  ON member (age);
-CREATE INDEX idx_exercise  ON programmer (exercise);
-CREATE INDEX idx_name  ON hospital (name);
+CREATE INDEX idx_hospital_member_programmer_id  ON covid (hospital_id,member_id,programmer_id); 
+CREATE INDEX idx_name ON hospital (name);
 
 
 EXPLAIN
